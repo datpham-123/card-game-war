@@ -14,10 +14,10 @@ class Hand:
         return self.cards_left() == 0
 
     def add_to_hand(self, list_card):
-        self.cards.extend(list_card)
+        return self.cards.extend(list_card)
 
     def remove_from_hand(self):
-        self.cards.pop()
+        return self.cards.pop()
 
     def __str__(self):
         return "You have {cards_left} cards left\nYour hand is {nums_card}\n".format(

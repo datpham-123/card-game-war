@@ -9,16 +9,19 @@ class Player:
         self.hand = hand
 
     def __str__(self):
-        return "{p} deck:\n {p_deck}".format(p=self.name, p_deck=self.hand)
+        return "\n{} have {} cards".format(self.name, self.hand.cards_left())
+        # return "{p} deck:\n {p_deck}".format(p=self.name, p_deck=self.hand)
 
     def play_card(self):
         play_card = self.hand.remove_from_hand()
+        print("{} have been placed!".format(play_card))
         return play_card
 
     def play_war_card(self):
         war_cards = []
 
-        for i in range(3):
-            war_cards.append(self.hand.cards_in_hand.pop(0))
+        if len(self.hand.cards) >= 3:
+            for i in range(3):
+                war_cards.append(self.hand.cards_in_hand.pop(0))
 
         return war_cards
