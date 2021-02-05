@@ -147,10 +147,10 @@ def start_round():
         else:
             if RANKS.index(p_card[1]) < RANKS.index(c_card[1]):
                 print("\n{} has higher rank, adding cards to hand".format(p2.name))
-                p1.hand.add_to_hand(table_cards)
+                p2.hand.add_to_hand(table_cards)
             else:
                 print("\n{} has higher rank, adding cards to hand".format(p1.name))
-                p2.hand.add_to_hand(table_cards)
+                p1.hand.add_to_hand(table_cards)
             table_cards.clear()
     print("\nGame ended\n")
 
