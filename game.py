@@ -36,10 +36,6 @@ def is_game_end(p1, p2):
     return p1.hand.is_hand_empty() or p2.hand.is_hand_empty()
 
 
-def p1_win(p1, p2):
-    return p1.hand.is_hand_empty()
-
-
 # message display how many cards left of each user at start of the round
 def game_start_message(p1, p2):
     print("\n-------------------------------\n")
@@ -108,6 +104,9 @@ def start_round():
     p1 = gen_player[0]
     p2 = gen_player[1]
     table_cards = []
+    wars_count = 0
+    wars_p1_win = 0
+    wars_p2_win = 0
 
     while not is_game_end(p1, p2):
         # welcome to new round, display how many card left
@@ -123,6 +122,7 @@ def start_round():
 
         # check war
         if is_a_war(p_card, c_card):
+            wars_count += 1
             display_war_message()
             table_cards.extend(p1.play_war_card())
             table_cards.extend(p2.play_war_card())
@@ -136,19 +136,34 @@ def start_round():
             table_cards.append(c_card)
             # if not a war, check rank of 2 cards play like normal
             if RANKS.index(p_card[1]) < RANKS.index(c_card[1]):
-                print("\n{} has higher rank, adding cards to hand".format(p1.name))
-                p1.hand.add_to_hand(table_cards)
-            else:
+                wars_p2_win += 1
                 print("\n{} has higher rank, adding cards to hand".format(p2.name))
                 p2.hand.add_to_hand(table_cards)
+            else:
+                wars_p1_win += 1
+                print("\n{} has higher rank, adding cards to hand".format(p1.name))
+                p1.hand.add_to_hand(table_cards)
+            table_cards.clear()
         else:
             if RANKS.index(p_card[1]) < RANKS.index(c_card[1]):
-                print("\n{} has higher rank, adding cards to hand".format(p1.name))
+                print("\n{} has higher rank, adding cards to hand".format(p2.name))
                 p1.hand.add_to_hand(table_cards)
             else:
-                print("\n{} has higher rank, adding cards to hand".format(p2.name))
+                print("\n{} has higher rank, adding cards to hand".format(p1.name))
                 p2.hand.add_to_hand(table_cards)
-    print("\nGame ended")
+            table_cards.clear()
+    print("\nGame ended\n")
+
+    # message who win
+    if not p1.hand.is_hand_empty():
+        print("{} win!".format(p1.name))
+    else:
+        print("{} win!".format(p2.name))
+
+    # print how many wars each playr win
+    print("\nThere are total {} wars".format(wars_count))
+    print("\n{} wins {} wars!".format(p1.name, wars_p1_win))
+    print("\n{} wins {} wars!".format(p2.name, wars_p2_win))
 
 
 def play():

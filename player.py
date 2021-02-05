@@ -22,6 +22,6 @@ class Player:
 
         if len(self.hand.cards) >= 3:
             for i in range(3):
-                war_cards.append(self.hand.cards_in_hand.pop(0))
+                war_cards.append(self.hand.cards.pop(0))
 
         return war_cards
