@@ -10,7 +10,6 @@ class Player:
 
     def __str__(self):
         return "\n{} have {} cards".format(self.name, self.hand.cards_left())
-        # return "{p} deck:\n {p_deck}".format(p=self.name, p_deck=self.hand)
 
     def play_card(self):
         play_card = self.hand.remove_from_hand()

@@ -160,7 +160,7 @@ def start_round():
     else:
         print("{} win!".format(p2.name))
 
-    # print how many wars each playr win
+    # print how many wars each player win
     print("\nThere are total {} wars".format(wars_count))
     print("\n{} wins {} wars!".format(p1.name, wars_p1_win))
     print("\n{} wins {} wars!".format(p2.name, wars_p2_win))
